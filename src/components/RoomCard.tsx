@@ -1,5 +1,5 @@
-import { Users, MapPin, Lock, CheckCircle2 } from 'lucide-react';
-import type { Room } from '@/lib/types';
+import { Users, MapPin, Lock, CheckCircle2 } from "lucide-react";
+import type { Room } from "@/lib/types";
 
 interface RoomCardProps {
   room: Room;
@@ -11,10 +11,12 @@ export function RoomCard({ room, selected, onSelect }: RoomCardProps) {
   return (
     <button
       onClick={onSelect}
+      aria-pressed={selected}
+      data-testid={`room-${room.id}`}
       className={`group relative w-full rounded-2xl border p-4 text-left transition-all duration-200 ${
         selected
-          ? 'border-teal-500 bg-teal-50 ring-2 ring-teal-500/20'
-          : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-md'
+          ? "border-teal-500 bg-teal-50 ring-2 ring-teal-500/20"
+          : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-md"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -43,6 +45,9 @@ export function RoomCard({ room, selected, onSelect }: RoomCardProps) {
           </span>
         )}
       </div>
+      <p className="mt-3 text-xs text-slate-600">
+        Equipment: {room.equipment.join(", ")}
+      </p>
       {selected && (
         <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-teal-500 text-white shadow">
           <CheckCircle2 className="h-3.5 w-3.5" />
