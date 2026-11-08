@@ -1,0 +1,15 @@
+{
+  "baseline_ref": "cdf1c81df397e0258d74e099afb7da81bf41027c",
+  "baseline_app_lines": 270,
+  "final_app_lines": 141,
+  "baseline_ui_modules": 4,
+  "final_ui_modules": 7,
+  "baseline_lib_modules": 3,
+  "final_lib_modules": 6,
+  "baseline_tests": 18,
+  "final_tests": 33,
+  "connector_browser_assertions": 18,
+  "standalone_ui_command": "failed at browser launch; 0 checks executed",
+  "duplicate_blocks_removed": 1,
+  "duplicate_measure": "Manual source comparison: removed App.timeInputsValid block, which reparsed the same three fields already parsed above. This is a narrowly defined duplicate validation block, not a clone-detector score."
+}

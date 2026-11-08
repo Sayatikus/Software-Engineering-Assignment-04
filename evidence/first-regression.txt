@@ -1,0 +1,33 @@
+$ npm test
+
+> smart-campus-assignment04@0.0.0 test
+> node --test tests/*.test.mjs
+
+✔ T01 AC4 touching after (0.908041ms)
+✔ T02 AC1 starts now (0.06175ms)
+✔ T03 AC1 zero duration (0.042458ms)
+✔ T04 AC1 reversed (0.062416ms)
+✔ T05 AC1 past day end (0.4165ms)
+✔ T06 AC2 120 minutes (0.048708ms)
+✔ T07 AC2 121 minutes (0.046167ms)
+✔ T08 AC4 touching before (0.037ms)
+✔ T09 AC4 partial overlap (0.074084ms)
+✔ T10 AC4 contains booking (0.092917ms)
+✔ T11 AC4 inside booking (0.048166ms)
+✔ T12 AC4 identical interval (0.044084ms)
+✔ T13 AC3 blocked room (0.031542ms)
+✔ T14 AC4 empty schedule (0.026875ms)
+✔ T16 AC4 overlapping booking in another room (0.030167ms)
+✔ T17 AC1 end at 24:00 (0.024375ms)
+✔ T18 AC1 starts before now (0.030166ms)
+✔ T15 AC5 preserves booking contents and order (0.059542ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.381875
+
+EXIT CODE: 0

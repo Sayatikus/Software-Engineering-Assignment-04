@@ -1,0 +1,22 @@
+Date: 2026-11-08 Asia/Almaty
+Transport: Codex connected Chrome, real local Vite page http://127.0.0.1:5173
+Assertions executed through cua_repl Playwright locators. This is separate from the failed standalone npm run test:ui launch.
+PASS: UI01 six-room catalog visible
+PASS: UI02 exact capacity 40 includes Newton, excludes Turing
+PASS: UI03 AND equipment and capacity leaves Turing
+PASS: UI04 empty state for impossible capacity
+PASS: UI05 invalid attendees show understandable feedback
+PASS: UI06 Athena overlap rejected
+PASS: UI07 F5 switching to Turing immediately refreshes availability
+PASS: UI08 blocked room cannot retain Available
+PASS: UI09 filters clear selection and stale result
+PASS: UI10 hidden selection is not checked
+PASS: UI11 malformed time feedback
+PASS: UI12 121 minute limit enforced
+PASS: UI13 end at 24:00 accepted
+PASS: UI14 all six catalog cards present after reset
+PASS: UI15 390px mobile has no horizontal page overflow
+PASS: UI16 mobile checker returns Available
+PASS: UI17 320px narrow viewport has no horizontal page overflow
+PASS: UI18 repeat check preserves displayed bookings
+SUMMARY: 18/18 passed
