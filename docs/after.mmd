@@ -1,0 +1,11 @@
+flowchart TB
+  App["App.tsx: composition + input state"]
+  App --> UI["RoomFilters / TimeForm / RoomCard / Timeline / ResultPanel / BookingList"]
+  App --> Select["selection.ts: selected-room + time adapter"]
+  App --> Filters["roomFilters.ts: capacity AND equipment"]
+  App --> Data["sampleData.ts: fictional rooms + bookings"]
+  Select --> Filters
+  Select --> Rules["bookingLogic.ts: AC1-AC5 rules"]
+  Select --> Time["time.ts: parsing + formatting"]
+  Rules --> Time
+  Rules --> Types["types.ts: contracts"]

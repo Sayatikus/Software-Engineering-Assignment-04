@@ -1,0 +1,7 @@
+flowchart TB
+  App["App.tsx: state, form, result lifecycle, booking table"]
+  App --> UI["RoomCard / Timeline / ResultPanel"]
+  App --> Data["sampleData.ts: rooms + bookings"]
+  App --> Rules["bookingLogic.ts: validation + overlaps + time helpers"]
+  Rules --> Types["types.ts"]
+  UI --> Types

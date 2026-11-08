@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="495" height="235" preserveAspectRatio="xMinYMin meet" viewBox="0 0 495 235" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="495" height="235"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-235)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="85" y="188" width="325" height="42" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="180.0312" y="215" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,430) scale(1,-1)">App.tsx: input state and composition</text>
+			<text x="170.0016" y="203" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,406) scale(1,-1)">derived result; no stale CheckResult state</text>
+			<rect x="0" y="110" width="155" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="23.576199999999993" y="142" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,284) scale(1,-1)">Presentation (6 components)</text>
+			<text x="30.354999999999997" y="130" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,260) scale(1,-1)">filters, form, cards, result,</text>
+			<text x="32.6818" y="118" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,236) scale(1,-1)">timeline and booking list</text>
+			<rect x="172" y="110" width="150" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="225.9916" y="142" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,284) scale(1,-1)">selection.ts</text>
+			<text x="197.86419999999998" y="130" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,260) scale(1,-1)">selected room + text times</text>
+			<text x="211.0438" y="118" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,236) scale(1,-1)">fixed 09:00 adapter</text>
+			<rect x="339" y="110" width="156" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="390.1578" y="142" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,284) scale(1,-1)">sampleData.ts</text>
+			<text x="368.3304" y="130" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,260) scale(1,-1)">fictional rooms + bookings</text>
+			<text x="385.9536" y="118" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,236) scale(1,-1)">joined by roomId</text>
+			<path d="M 247,188 L 77,157 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="77 157, 74 162, 80 162" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<path d="M 247,188 L 247,157 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="247 157, 244 162, 250 162" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<path d="M 247,188 L 417,157 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="417 157, 414 162, 420 162" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<rect x="0" y="22" width="155" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="52.0648" y="54" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,108) scale(1,-1)">roomFilters.ts</text>
+			<text x="36.407199999999996" y="42" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,84) scale(1,-1)">capacity &gt;= attendees</text>
+			<text x="31.278999999999996" y="30" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,60) scale(1,-1)">ALL equipment via every</text>
+			<rect x="172" y="22" width="150" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="217.8184" y="54" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,108) scale(1,-1)">bookingLogic.ts</text>
+			<text x="204.2902" y="42" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,84) scale(1,-1)">original AC1-AC5 rules</text>
+			<text x="207.0916" y="30" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,60) scale(1,-1)">room-specific overlap</text>
+			<rect x="339" y="22" width="156" height="47" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(94%,95%,96%); fill-rule: evenodd;"/>
+			<text x="404.631" y="54" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,108) scale(1,-1)">time.ts</text>
+			<text x="379.6662" y="42" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,84) scale(1,-1)">strict HH:MM parser</text>
+			<text x="379.179" y="30" style="font-family: Helvetica; font-size: 8.4px;fill: rgb(12%,15%,18%); stroke:none;" transform="translate(0,60) scale(1,-1)">formatter; 24:00 end</text>
+			<path d="M 247,110 L 77,69 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="77 69, 74 74, 80 74" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<path d="M 247,110 L 247,69 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="247 69, 244 74, 250 74" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<path d="M 247,110 L 417,69 Z" style="stroke: rgb(48%,54%,60%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="417 69, 414 74, 420 74" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(48%,54%,60%); fill-rule: evenodd;"/>
+			<text x="116.46000000000001" y="3" style="font-family: Times-Roman; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,6) scale(1,-1)">types.ts: shared contracts; bookingLogic re-exports time helpers for compatibility</text>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "repository_url": "https://github.com/Sayatikus/Software-Engineering-Assignment-04",
+  "published_baseline_ref": "03d7cd408213e0d365785e858171821b331eda14",
+  "published_final_code_ref": "55c66603b947e01480ece2c2385ffbe9c66c4610",
+  "baseline_branch": "baseline-a04",
+  "final_code_branch": "final-code-a04",
+  "publication_date": "2026-11-08 Asia/Almaty",
+  "method": "GitHub browser file uploads under Sayatikus; no new credential created",
+  "canonical_local_baseline_ref": "cdf1c81df397e0258d74e099afb7da81bf41027c",
+  "canonical_local_final_ref": "79bd5c7283f280ea976e9ec155806771e29cbe6f",
+  "baseline_files_verified": 25,
+  "final_code_files_verified": 51,
+  "verification": "Exact Git blob hash match for every file against the corresponding locally tested snapshot. Upload-created GitHub commits have different commit IDs but identical file trees."
+}
