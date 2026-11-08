@@ -1,270 +1,141 @@
-import { useMemo, useState } from 'react';
-import { Clock, Search, RotateCcw, GraduationCap } from 'lucide-react';
-import { rooms, bookings as initialBookings } from '@/lib/sampleData';
-import { checkAvailability, fmt, parseTime } from '@/lib/bookingLogic';
-import type { Booking, CheckResult } from '@/lib/types';
-import { RoomCard } from '@/components/RoomCard';
-import { Timeline } from '@/components/Timeline';
-import { ResultPanel } from '@/components/ResultPanel';
+import { useState } from "react";
+import { rooms, bookings } from "./lib/sampleData";
+import { filterRooms } from "./lib/roomFilters";
+import { evaluateSelection } from "./lib/selection";
+import { parseTime } from "./lib/time";
+import { RoomFilters } from "./components/RoomFilters";
+import { TimeForm } from "./components/TimeForm";
+import { RoomCard } from "./components/RoomCard";
+import { ResultPanel } from "./components/ResultPanel";
+import { Timeline } from "./components/Timeline";
+import { BookingList } from "./components/BookingList";
 
 export default function App() {
-  const [bookings, setBookings] = useState<Booking[]>(initialBookings);
-  const [selectedRoomId, setSelectedRoomId] = useState<string>('');
-  const [startTime, setStartTime] = useState('10:00');
-  const [endTime, setEndTime] = useState('11:00');
-  const [currentTimeStr, setCurrentTimeStr] = useState('09:00');
-  const [result, setResult] = useState<CheckResult | null>(null);
-
-  const selectedRoom = useMemo(
-    () => rooms.find((r) => r.id === selectedRoomId) ?? null,
-    [selectedRoomId]
-  );
-
-  const roomBookings = useMemo(
-    () => bookings.filter((b) => b.roomId === selectedRoomId),
-    [bookings, selectedRoomId]
-  );
-
-  const parsedStart = parseTime(startTime);
-  const parsedEnd = parseTime(endTime);
-  const parsedCurrent = parseTime(currentTimeStr);
-
-  const handleCheck = () => {
-    if (!selectedRoom || parsedStart === null || parsedEnd === null || parsedCurrent === null) {
-      setResult({
-        decision: 'unavailable',
-        reasons: ['Please select a room and enter valid times in HH:MM format.'],
-      });
-      return;
-    }
-    const res = checkAvailability(selectedRoom, parsedStart, parsedEnd, parsedCurrent, bookings);
-    setResult(res);
-
-    // AC5: if available, create a booking to demonstrate the checker
-    // — but the requirement says "without changing the existing booking data",
-    // so we only show the decision and DO NOT persist.
+  const [attendees, setAttendees] = useState("1");
+  const [equipment, setEquipment] = useState<string[]>([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [start, setStart] = useState("10:00");
+  const [end, setEnd] = useState("11:00");
+  const [checked, setChecked] = useState(false);
+  const matchingRooms = filterRooms(rooms, Number(attendees), equipment);
+  // A hidden selection is never used for availability, and is cleared on filter changes.
+  const selectedRoom = matchingRooms.find((r) => r.id === selectedId) ?? null;
+  const roomBookings = bookings.filter((b) => b.roomId === selectedRoom?.id);
+  // Derived result automatically refreshes when the selected room or interval changes (F5).
+  const result = checked
+    ? evaluateSelection(
+        rooms,
+        bookings,
+        selectedId,
+        Number(attendees),
+        equipment,
+        start,
+        end,
+      )
+    : null;
+  const reset = () => {
+    setAttendees("1");
+    setEquipment([]);
+    setSelectedId("");
+    setStart("10:00");
+    setEnd("11:00");
+    setChecked(false);
   };
-
-  const handleReset = () => {
-    setBookings(initialBookings);
-    setSelectedRoomId('');
-    setStartTime('10:00');
-    setEndTime('11:00');
-    setCurrentTimeStr('09:00');
-    setResult(null);
-  };
-
-  const timeInputsValid =
-    parseTime(startTime) !== null &&
-    parseTime(endTime) !== null &&
-    parseTime(currentTimeStr) !== null;
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-50 to-teal-50/40">
-      {/* Header */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-4 sm:px-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600 text-white shadow-sm">
-            <GraduationCap className="h-5 w-5" />
-          </div>
-          <div>
-            <h1 className="text-base font-bold text-slate-800 sm:text-lg">
-              Smart Campus Room Availability Checker
-            </h1>
-            <p className="text-xs text-slate-500">
-              Check if a campus room is free for your time slot
-            </p>
-          </div>
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      <header className="border-b bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-5">
+          <p className="text-xs font-semibold uppercase tracking-widest text-teal-700">
+            Smart Campus / Assignment 04
+          </p>
+          <h1 className="mt-1 text-xl font-bold sm:text-2xl">
+            Find a room for your next session
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Fictional campus catalog. Check availability without creating a
+            booking.
+          </p>
         </div>
       </header>
-
-      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-          {/* Left: Room selection */}
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <h2 className="text-sm font-semibold text-slate-700">Select a Room</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
-                {rooms.length} rooms
+      <main className="mx-auto max-w-6xl px-4 py-6">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <section aria-label="Room catalog">
+            <h2 className="mb-3 font-semibold">
+              Choose a room{" "}
+              <span className="text-sm font-normal text-slate-500">
+                ({matchingRooms.length} matching rooms)
               </span>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {rooms.map((room) => (
-                <RoomCard
-                  key={room.id}
-                  room={room}
-                  selected={room.id === selectedRoomId}
-                  onSelect={() => {
-                    setSelectedRoomId(room.id);
-                    setResult(null);
-                  }}
-                />
-              ))}
-            </div>
+            </h2>
+            <RoomFilters
+              attendees={attendees}
+              equipment={equipment}
+              onAttendees={(v) => {
+                setAttendees(v);
+                setSelectedId("");
+                setChecked(false);
+              }}
+              onEquipment={(v) => {
+                setEquipment(v);
+                setSelectedId("");
+                setChecked(false);
+              }}
+            />
+            {matchingRooms.length === 0 ? (
+              <p role="status" className="rounded-xl border border-dashed p-5">
+                No rooms match your requirements. Reduce attendees or remove
+                equipment.
+              </p>
+            ) : (
+              <div className="grid gap-3 sm:grid-cols-2">
+                {matchingRooms.map((room) => (
+                  <RoomCard
+                    key={room.id}
+                    room={room}
+                    selected={room.id === selectedRoom?.id}
+                    onSelect={() => setSelectedId(room.id)}
+                  />
+                ))}
+              </div>
+            )}
           </section>
-
-          {/* Right: Form + result */}
-          <section className="space-y-5">
-            {/* Time inputs */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <div className="mb-4 flex items-center gap-2">
-                <Clock className="h-4 w-4 text-slate-400" />
-                <h2 className="text-sm font-semibold text-slate-700">
-                  Time Interval
+          <section className="space-y-4" aria-label="Availability checker">
+            <TimeForm
+              start={start}
+              end={end}
+              onStart={setStart}
+              onEnd={setEnd}
+              onCheck={() => setChecked(true)}
+              onReset={reset}
+            />
+            <div
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              data-testid="availability-result"
+            >
+              {selectedRoom && (
+                <h2 className="mb-2 text-sm font-semibold">
+                  Availability - {selectedRoom.name}
                 </h2>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <TimeField
-                  id="current-time"
-                  label="Current time"
-                  value={currentTimeStr}
-                  onChange={setCurrentTimeStr}
-                />
-                <TimeField
-                  id="start-time"
-                  label="Start"
-                  value={startTime}
-                  onChange={setStartTime}
-                />
-                <TimeField
-                  id="end-time"
-                  label="End"
-                  value={endTime}
-                  onChange={setEndTime}
-                />
-              </div>
-
-              <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
-                <span className="rounded-md bg-slate-100 px-2 py-1 font-mono">
-                  Duration: {durationLabel(startTime, endTime)}
-                </span>
-                {!timeInputsValid && (
-                  <span className="text-amber-600">
-                    Enter all times as HH:MM (24-hour format).
-                  </span>
-                )}
-              </div>
-
-              <div className="mt-5 flex gap-3">
-                <button
-                  onClick={handleCheck}
-                  className="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-700 active:scale-[0.98]"
-                >
-                  <Search className="h-4 w-4" />
-                  Check Availability
-                </button>
-                <button
-                  onClick={handleReset}
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 transition-all hover:bg-slate-50 active:scale-[0.98]"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                  Reset
-                </button>
-              </div>
+              )}
+              <ResultPanel result={result} />
             </div>
-
-            {/* Result */}
-            <ResultPanel result={result} />
-
-            {/* Timeline */}
             {selectedRoom && (
               <Timeline
                 bookings={roomBookings}
-                candidateStart={parsedStart}
-                candidateEnd={parsedEnd}
+                candidateStart={parseTime(start)}
+                candidateEnd={parseTime(end)}
               />
             )}
           </section>
         </div>
-
-        {/* Existing bookings for selected room */}
-        {selectedRoom && roomBookings.length > 0 && (
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
-            <h3 className="mb-3 text-sm font-semibold text-slate-700">
-              Existing bookings — {selectedRoom.name}
-            </h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-slate-200 text-xs text-slate-500">
-                    <th className="pb-2 pr-4 font-medium">Time</th>
-                    <th className="pb-2 pr-4 font-medium">Title</th>
-                    <th className="pb-2 font-medium">Booked by</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {roomBookings
-                    .slice()
-                    .sort((a, b) => a.start - b.start)
-                    .map((b) => (
-                      <tr
-                        key={b.id}
-                        className="border-b border-slate-100 last:border-0"
-                      >
-                        <td className="py-2.5 pr-4 font-mono text-xs text-slate-600">
-                          {fmt(b.start)}–{fmt(b.end)}
-                        </td>
-                        <td className="py-2.5 pr-4 text-slate-700">{b.title}</td>
-                        <td className="py-2.5 text-slate-500">{b.bookedBy}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+        {selectedRoom && (
+          <BookingList bookings={roomBookings} name={selectedRoom.name} />
         )}
       </main>
-
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-slate-400">
-        Fictional sample data for demonstration only.
+      <footer className="px-4 py-5 text-center text-xs text-slate-500">
+        All rooms, people and bookings are fictional. Fixed current time 09:00.
       </footer>
     </div>
   );
-}
-
-function TimeField({
-  id,
-  label,
-  value,
-  onChange,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-xs font-medium text-slate-600"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type={id === "end-time" ? "text" : "time"}
-        placeholder={id === "end-time" ? "HH:MM (up to 24:00)" : undefined}
-        inputMode={id === "end-time" ? "numeric" : undefined}
-        value={value}
-        onChange={(e) => {
-          onChange(e.target.value);
-        }}
-        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 transition-colors focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-      />
-    </div>
-  );
-}
-
-function durationLabel(startStr: string, endStr: string): string {
-  const s = parseTime(startStr);
-  const e = parseTime(endStr);
-  if (s === null || e === null || s >= e) return '—';
-  const mins = e - s;
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
-  if (h === 0) return `${m} min`;
-  if (m === 0) return `${h} hr`;
-  return `${h} hr ${m} min`;
 }
